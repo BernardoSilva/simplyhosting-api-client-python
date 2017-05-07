@@ -1,0 +1,11 @@
+.Python
+.python-version
+.tox/
+include/
+lib/
+pip-selfcheck.json
+simplyhosting.egg-info/
+*.pyc
+deactivate/
+bin/
+.cache/
