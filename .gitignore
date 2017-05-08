@@ -9,3 +9,4 @@ simplyhosting.egg-info/
 deactivate/
 bin/
 .cache/
+coverage/
