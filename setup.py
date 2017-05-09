@@ -13,7 +13,7 @@ if os.path.exists('README.txt'):
 test_requirements = []
 
 def getRequires():
-    deps = ['python_http_client>=2.1.1']
+    deps = ['requests==2.13.0']
     if sys.version_info < (2, 7):
         deps.append('unittest2')
     elif (3, 0) <= sys.version_info < (3, 2):
@@ -34,7 +34,8 @@ setup(
     install_requires=getRequires(),
     classifiers=[
         'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3.2'
+        'Programming Language :: Python :: 3.3',
+        'Programming Language :: Python :: 3.4'
     ],
     test_suite='test',
     tests_require=test_requirements
