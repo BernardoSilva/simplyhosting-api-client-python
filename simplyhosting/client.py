@@ -12,13 +12,20 @@ class Client(object):
         """
         Construct Simply Hosting API object.
         """
-        # @todo client has to require either (username,password)
-        # or (api_key, api_secret)
+        self.username = kwargs.get('username', '')
+        self.password = kwargs.get('password', '')
         self.api_key = kwargs.get('api_key', '')
         self.api_secret = kwargs.get('api_secret', '')
         self.host = kwargs.get('host', 'https://api.simplyhosting.com/v2')
         self.request = ''
         self.api_version = 'v2'
+
+        if not (self.username and self.password):
+            if not (self.api_key and self.api_secret):
+                raise ValueError(
+                    'Either (username, password) or (api_key, api_secret)'
+                    ' kwargs combination are required'
+                )
 
     def _generate_token(self):
         timestamp = int(time.time())
