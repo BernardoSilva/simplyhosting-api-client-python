@@ -22,7 +22,10 @@ class Client(object):
         requests_method = getattr(requests, self.request.method_type)
         print('calling with data:')
         print(self.request.data)
-        return requests_method(self._url(self.request.path), data = self.request.data)
+        return requests_method(
+            self._url(self.request.path),
+            data=self.request.data
+        )
 
     # Client helper methods
     def authenticate_with_username_password(self, username, password):
