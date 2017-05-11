@@ -1,0 +1,2 @@
+class IP(object):
+    pass

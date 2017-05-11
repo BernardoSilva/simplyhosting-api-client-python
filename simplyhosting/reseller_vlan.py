@@ -1,0 +1,2 @@
+class ResellerVlan(object):
+    pass

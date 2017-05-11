@@ -1,0 +1,2 @@
+class ResellerClient(object):
+    pass

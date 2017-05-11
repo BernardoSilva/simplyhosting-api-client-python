@@ -1,0 +1,2 @@
+class Vlan(object):
+    pass
