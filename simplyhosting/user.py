@@ -19,19 +19,50 @@ class User:
         return self.apiClient
 
     def get_payment_methods(self):
-        pass
+        request = Request('post', '/user/getPaymentMethods')
+        self.apiClient.request = request
+        return self.apiClient
 
-    def generate_secret_key(self):
-        pass
+    def generate_secret_key(self, key_name, access):
+        request = Request('post', '/user/generateSecretKey')
+        request.data = {}
+        key_name = kwargs.get('key_name', '')
+        access = kwargs.get('access', '')
+        if key_name:
+            request.data['keyName'] = key_name
 
-    def update_secret_key(self):
-        pass
+        if access:
+            request.data['access'] = access
+        self.apiClient.request = request
+        return self.apiClient
 
-    def delete_secret_key(self):
-        pass
+    def update_secret_key(self, key_id, **kwargs):
+        request = Request('post', '/user/updateSecretKey')
+        request.data = {'keyId': key_id}
+        key_name = kwargs.get('key_name', '')
+        access = kwargs.get('access', '')
+        if key_name:
+            request.data['keyName'] = key_name
+
+        if access:
+            request.data['access'] = access
+        
+        self.apiClient.request = request
+        return self.apiClient
+
+    def delete_secret_key(self, key_id):
+        request = Request('post', '/user/deleteSecretKey')
+        request.data = {'keyId': key_id}
+        self.apiClient.request = request
+        return self.apiClient
 
     def get_secret_keys(self):
-        pass
+        request = Request('post', '/user/getSecretKeys')
+        self.apiClient.request = request
+        return self.apiClient
 
-    def regenerate_secret_key(self):
-        pass
+    def regenerate_secret_key(self, key_identifier, access):
+        request = Request('post', '/user/regenerateSecretKey')
+        request.data = {'keyId': key_identifier, 'access': access}
+        self.apiClient.request = request
+        return self.apiClient

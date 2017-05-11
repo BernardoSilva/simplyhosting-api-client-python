@@ -1,31 +1,52 @@
 import os
 import requests
+import hashlib
+import time
 from .user import User
+from .response import Response
 
 
 class Client(object):
     """Simply Hosting apiI."""
-    def __init__(self, api_key, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """
         Construct Simply Hosting API object.
         """
-        self.api_key = api_key
+        # @todo client has to require either (username,password) or (api_key, api_secret)
+        self.api_key = kwargs.get('api_key', '')
+        self.api_secret = kwargs.get('api_secret', '')
         self.host = kwargs.get('host', 'https://api.simplyhosting.com/v2')
         self.request = ''
         self.api_version = 'v2'
+        print('HOST:', self.host)
+
+
+    def _generate_token(self):
+        timestamp = int(time.time())
+        hash_object = hashlib.sha256(self.api_secret + "-" + str(timestamp) + "-" + str(self.api_key))
+        return str(self.api_key) +"-"+ hash_object.hexdigest() +"-"+ str(timestamp)
 
     def _url(self, path):
-        return 'https://api.simplyhosting.com/v2' + path
+        return self.host + path + '?api_key=' + self._generate_token()
 
     def call(self):
         """Final method to be called to perform the request that was built"""
         requests_method = getattr(requests, self.request.method_type)
+        # Ensure we have a token to do the request
+        # self.request.params['api_key'] = self._generate_token()
         print('calling with data:')
         print(self.request.data)
-        return requests_method(
+        print('Requesting endpoint: ', self._url(self.request.path))
+        print('Request params: ', self.request.params)
+        
+
+        requests_response = requests_method(
             self._url(self.request.path),
-            data=self.request.data
+            data=self.request.data,
+            params=self.request.params
         )
+
+        return Response(requests_response)
 
     # Client helper methods
     def authenticate_with_username_password(self, username, password):
