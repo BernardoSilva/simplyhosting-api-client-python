@@ -1,2 +1,3 @@
 class ResellerServer(object):
-    pass
+    def __init__(self, apiClient):
+        self.apiClient = apiClient

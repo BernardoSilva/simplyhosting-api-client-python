@@ -1,2 +1,3 @@
 class R1Soft(object):
-    pass
+    def __init__(self, apiClient):
+        self.apiClient = apiClient

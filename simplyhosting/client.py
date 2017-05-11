@@ -6,8 +6,8 @@ from .ip import IP
 from .os import OS
 from .product import Product
 from .r1soft import R1Soft
-from .reseller import Reseller
 from .reseller_client import ResellerClient
+from .reseller_server import ResellerServer
 from .reseller_vlan import ResellerVlan
 from .server import Server
 from .service import Service
@@ -82,13 +82,13 @@ class Client(object):
     def product(self):
         return Product(self)
 
-    def r1Soft(self):
+    def r1soft(self):
         return R1Soft(self)
 
-    def resellerClient(self):
+    def reseller_client(self):
         return ResellerClient(self)
 
-    def resellerVlan(self):
+    def reseller_vlan(self):
         return ResellerVlan(self)
 
     def server(self):
