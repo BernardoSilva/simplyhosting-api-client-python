@@ -9,6 +9,16 @@
 pip install ...
 ```
 
+## How to use
+
+```python
+import simplyhosting
+
+
+simplyClient = simplyhosting.Client(api_key='xxx', api_secret='your-api-secret')
+response = simplyClient.user().ping().call()
+```
+
 ## How to setup
 
 ```bash
@@ -41,4 +51,10 @@ and then just run tox command from the root of the project
 ```bash
 tox
 ```
+
+## How to contribute
+
+Just [check the issues list](https://github.com/BernardoSilva/simplyhosting-api-client-python/issues) and open a Pull Request to help us improve this library.
+
+If you find any problem or have a suggestion open a [new issue](https://github.com/BernardoSilva/simplyhosting-api-client-python/issues/new)
 
