@@ -2,7 +2,18 @@ import os
 import requests
 import hashlib
 import time
+from .ip import IP
+from .os import OS
+from .product import Product
+from .r1soft import R1Soft
+from .reseller import Reseller
+from .reseller_client import ResellerClient
+from .reseller_vlan import ResellerVlan
+from .server import Server
+from .service import Service
+from .support import Support
 from .user import User
+from .vlan import Vlan
 from .response import Response
 
 
@@ -63,34 +74,34 @@ class Client(object):
 
     # API Resources available
     def ip(self):
-        pass
+        return IP(self)
 
     def os(self):
-        pass
+        return OS(self)
 
     def product(self):
-        pass
+        return Product(self)
 
     def r1Soft(self):
-        pass
+        return R1Soft(self)
 
     def resellerClient(self):
-        pass
+        return ResellerClient(self)
 
     def resellerVlan(self):
-        pass
+        return ResellerVlan(self)
 
     def server(self):
-        pass
+        return Server(self)
 
     def service(self):
-        pass
+        return Service(self)
 
     def support(self):
-        pass
+        return Support(self)
 
     def user(self):
         return User(self)
 
     def vlan(self):
-        pass
+        return Vlan(self)
