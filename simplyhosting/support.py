@@ -1,3 +1,6 @@
+from .request import Request
+
+
 class Support(object):
     def __init__(self, apiClient):
         self.apiClient = apiClient
