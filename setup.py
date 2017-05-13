@@ -21,15 +21,17 @@ def getRequires():
     return deps
 
 setup(
-    name='simplyhosting',
+    name='simplyhosting-api-client',
     version=str(__version__),
     author='Bernardo Vieira da Silva',
     author_email='benny.stuff@gmail.com',
     url='https://github.com/bernardosilva/simplyhosting-api-client-python/',
+    download_url='https://github.com/bernardosilva/simplyhosting-api-client-python/archive/0.0.1.tar.gz',
     packages=find_packages(exclude=["temp*.py", "register.py", "test"]),
     include_package_data=True,
     license='MIT',
-    description='Simply Hosting library for Python',
+    description='Simply Hosting API client library for Python',
+    keywords= ['Simply Hosting', 'API', 'Client'],
     long_description=long_description,
     install_requires=getRequires(),
     classifiers=[
