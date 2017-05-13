@@ -25,20 +25,6 @@ class Test_support(unittest.TestCase):
         request = self.client.request
         self.assertEqual('value', request.data['optionalParam'])
 
-    def test_support_create_ticket_set_all_fields_correctly(self):
-        ticket_subject = 'Server is down'
-        ticket_body = 'The server has a network issue!'
-        self.client.support().create_ticket(
-            ticket_subject,
-            ticket_body,
-            self.optional_data
-        )
-
-        request = self.client.request
-        self.assertEqual(ticket_subject, request.data['subject'])
-        self.assertEqual(ticket_body, request.data['text'])
-        self.assertEqual('value', request.data['optionalParam'])
-
     def test_get_ticket_set_all_fields_correctly(self):
         self.client.support().get_ticket(69)
         request = self.client.request
@@ -60,3 +46,17 @@ class Test_support(unittest.TestCase):
         self.client.support().close_ticket(69)
         request = self.client.request
         self.assertEqual(69, request.data['ticketId'])
+
+    def test_create_ticket_set_all_fields_correctly(self):
+        ticket_subject = 'Server is down'
+        ticket_body = 'The server has a network issue!'
+        self.client.support().create_ticket(
+            ticket_subject,
+            ticket_body,
+            self.optional_data
+        )
+
+        request = self.client.request
+        self.assertEqual(ticket_subject, request.data['subject'])
+        self.assertEqual(ticket_body, request.data['text'])
+        self.assertEqual('value', request.data['optionalParam'])
