@@ -24,15 +24,42 @@ class Support(object):
             request.data['serverId'] = server_id
         if service_id:
             request.data['serviceId'] = service_id
+        if status is not None:
+            request.data['status'] = status
 
         self.apiClient.request = request
         return self.apiClient
 
-    def get_tickets(self):
-        pass
+    def get_tickets(self, limit, **kwargs):
+        request = Request('post', '/support/getTickets')
+        client_id = kwargs.get('client_id', '')
+        from_date = kwargs.get('from_date', '')
+        to_date = kwargs.get('to_date', '')
+        server_id = kwargs.get('server_id', '')
+        service_id = kwargs.get('service_id', '')
+        status = kwargs.get('status', '')
+        request.data = {'limit': limit}
 
-    def search(self):
-        pass
+        if client_id:
+            request.data['clientId'] = client_id
+        if from_date:
+            request.data['fromDate'] = from_date
+        if to_date:
+            request.data['toDate'] = to_date
+        if server_id:
+            request.data['serverId'] = server_id
+        if service_id:
+            request.data['serviceId'] = service_id
+        if status is not None:
+            request.data['status'] = status
+        self.apiClient.request = request
+        return self.apiClient
+
+    def search(self, data={}):
+        request = Request('post', '/support/search')
+        request.data = data
+        self.apiClient.request = request
+        return self.apiClient
 
     def get_ticket(self):
         pass
