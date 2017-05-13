@@ -28,6 +28,24 @@ class Support(object):
         self.apiClient.request = request
         return self.apiClient
 
+    def get_tickets(self):
+        pass
+
+    def search(self):
+        pass
+
+    def get_ticket(self):
+        pass
+
+    def reply_ticket(self):
+        pass
+
+    def update_ticket_priority(self):
+        pass
+
+    def close_ticket(self):
+        pass
+
     def create_ticket(self, subject, text, **kwargs):
         request = Request('post', '/support/createTicket')
         request.data = {'subject': subject, 'text': text}
@@ -51,3 +69,12 @@ class Support(object):
 
         self.apiClient.request = request
         return self.apiClient
+
+    def update_ticket(self):
+        pass
+
+    def forward_to_ph(self):
+        pass
+
+    def forward_to_ph_remove(self):
+        pass
