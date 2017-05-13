@@ -30,8 +30,11 @@ class Support(object):
         self.apiClient.request = request
         return self.apiClient
 
-    def reply_ticket(self):
-        pass
+    def reply_ticket(self, ticket_id, text):
+        request = Request('post', '/support/replyTicket')
+        request.data = {'ticketId': ticket_id, 'text': text}
+        self.apiClient.request = request
+        return self.apiClient
 
     def update_ticket_priority(self):
         pass
