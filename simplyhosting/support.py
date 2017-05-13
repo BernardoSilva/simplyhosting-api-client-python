@@ -36,8 +36,11 @@ class Support(object):
         self.apiClient.request = request
         return self.apiClient
 
-    def update_ticket_priority(self):
-        pass
+    def update_ticket_priority(self, ticket_id, priority):
+        request = Request('post', '/support/updateTicketPriority')
+        request.data = {'ticketId': ticket_id, 'priority': priority}
+        self.apiClient.request = request
+        return self.apiClient
 
     def close_ticket(self):
         pass
