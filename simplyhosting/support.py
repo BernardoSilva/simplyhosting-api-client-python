@@ -5,49 +5,75 @@ class Support(object):
     def __init__(self, apiClient):
         self.apiClient = apiClient
 
-    def get_active_tickets(self, **kwargs):
+    def get_active_tickets(self, optional_data={}):
         request = Request('post', '/support/getActiveTickets')
-        client_id = kwargs.get('client_id', '')
-        from_date = kwargs.get('from_date', '')
-        to_date = kwargs.get('to_date', '')
-        server_id = kwargs.get('server_id', '')
-        service_id = kwargs.get('service_id', '')
-        status = kwargs.get('status', '')
+        request.data = optional_data
+        self.apiClient.request = request
+        return self.apiClient
 
-        if client_id:
-            request.data['clientId'] = client_id
-        if from_date:
-            request.data['fromDate'] = from_date
-        if to_date:
-            request.data['toDate'] = to_date
-        if server_id:
-            request.data['serverId'] = server_id
-        if service_id:
-            request.data['serviceId'] = service_id
+    def get_tickets(self, limit, optional_data={}):
+        request = Request('post', '/support/getTickets')
+        request.data = {'limit': limit}
+        request.data.update(optional_data)
+        self.apiClient.request = request
+        return self.apiClient
+
+    def search(self, data={}):
+        request = Request('post', '/support/search')
+        request.data = data
+        self.apiClient.request = request
+        return self.apiClient
+
+    def get_ticket(self, ticket_id):
+        request = Request('post', '/support/getTicket')
+        request.data = {'ticketId': ticket_id}
+        self.apiClient.request = request
+        return self.apiClient
+
+    def reply_ticket(self, ticket_id, text):
+        request = Request('post', '/support/replyTicket')
+        request.data = {'ticketId': ticket_id, 'text': text}
+        self.apiClient.request = request
+        return self.apiClient
+
+    def update_ticket_priority(self, ticket_id, priority):
+        request = Request('post', '/support/updateTicketPriority')
+        request.data = {'ticketId': ticket_id, 'priority': priority}
+        self.apiClient.request = request
+        return self.apiClient
+
+    def close_ticket(self, ticket_id):
+        request = Request('post', '/support/closeTicket')
+        request.data = {'ticketId': ticket_id}
+        self.apiClient.request = request
+        return self.apiClient
+
+    def create_ticket(self, subject, text, optional_data={}):
+        request = Request('post', '/support/createTicket')
+        request.data = {'subject': subject, 'text': text}
+        request.data.update(optional_data)
 
         self.apiClient.request = request
         return self.apiClient
 
-    def create_ticket(self, subject, text, **kwargs):
-        request = Request('post', '/support/createTicket')
-        request.data = {'subject': subject, 'text': text}
+    def update_ticket(self, ticket_id, optional_data={}):
+        request = Request('post', '/support/updateTicket')
+        request.data = {'ticketId': ticket_id}
+        request.data.update(optional_data)
 
-        server_id = kwargs.get('server_id', '')
-        service_id = kwargs.get('service_id', '')
-        cc = kwargs.get('cc', '')
-        priority = kwargs.get('priority', '')
-        ticket_type = kwargs.get('type', '')
+        self.apiClient.request = request
+        return self.apiClient
 
-        if service_id:
-            request.data['serviceId'] = service_id
-        if server_id:
-            request.data['serverId'] = server_id
-        if cc:
-            request.data['cc'] = cc
-        if priority:
-            request.data['priority'] = priority
-        if ticket_type:
-            request.data['type'] = ticket_type
+    def forward_to_ph(self, ticket_id):
+        request = Request('post', '/support/forwardToPH')
+        request.data = {'ticketId': ticket_id}
+
+        self.apiClient.request = request
+        return self.apiClient
+
+    def forward_to_ph_remove(self, ticket_id):
+        request = Request('post', '/support/forwardToPHRemove')
+        request.data = {'ticketId': ticket_id}
 
         self.apiClient.request = request
         return self.apiClient
