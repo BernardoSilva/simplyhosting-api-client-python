@@ -71,3 +71,8 @@ class Test_support(unittest.TestCase):
         self.client.support().forward_to_ph(69)
         request = self.client.request
         self.assertEqual(69, request.data['ticketId'])
+
+    def test_forward_to_ph_remove_set_all_fields_correctly(self):
+        self.client.support().forward_to_ph_remove(69)
+        request = self.client.request
+        self.assertEqual(69, request.data['ticketId'])
