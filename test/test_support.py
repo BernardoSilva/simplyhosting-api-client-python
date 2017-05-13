@@ -51,7 +51,12 @@ class Test_support(unittest.TestCase):
         self.assertEqual('Done!', request.data['text'])
 
     def test_update_ticket_priority_set_all_fields_correctly(self):
-        self.client.support().reply_ticket(69, 2)
+        self.client.support().update_ticket_priority(69, 2)
         request = self.client.request
         self.assertEqual(69, request.data['ticketId'])
         self.assertEqual(2, request.data['priority'])
+
+    def test_close_ticket_set_all_fields_correctly(self):
+        self.client.support().close_ticket(69)
+        request = self.client.request
+        self.assertEqual(69, request.data['ticketId'])

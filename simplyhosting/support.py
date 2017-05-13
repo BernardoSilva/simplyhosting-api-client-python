@@ -42,8 +42,11 @@ class Support(object):
         self.apiClient.request = request
         return self.apiClient
 
-    def close_ticket(self):
-        pass
+    def close_ticket(self, ticket_id):
+        request = Request('post', '/support/closeTicket')
+        request.data = {'ticketId': ticket_id}
+        self.apiClient.request = request
+        return self.apiClient
 
     def create_ticket(self, subject, text, optional_data={}):
         request = Request('post', '/support/createTicket')
