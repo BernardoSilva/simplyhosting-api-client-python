@@ -60,3 +60,9 @@ class Test_support(unittest.TestCase):
         self.assertEqual(ticket_subject, request.data['subject'])
         self.assertEqual(ticket_body, request.data['text'])
         self.assertEqual('value', request.data['optionalParam'])
+
+    def test_update_ticket_set_all_fields_correctly(self):
+        self.client.support().update_ticket(69, self.optional_data)
+        request = self.client.request
+        self.assertEqual(69, request.data['ticketId'])
+        self.assertEqual('value', request.data['optionalParam'])

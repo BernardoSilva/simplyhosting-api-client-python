@@ -56,8 +56,13 @@ class Support(object):
         self.apiClient.request = request
         return self.apiClient
 
-    def update_ticket(self):
-        pass
+    def update_ticket(self, ticket_id, optional_data={}):
+        request = Request('post', '/support/updateTicket')
+        request.data = {'ticketId': ticket_id}
+        request.data.update(optional_data)
+
+        self.apiClient.request = request
+        return self.apiClient
 
     def forward_to_ph(self):
         pass
