@@ -4,9 +4,12 @@
 include/
 lib/
 pip-selfcheck.json
-simplyhosting.egg-info/
+simplyhosting_api_client.egg-info/
 *.pyc
 deactivate/
 bin/
 .cache/
 coverage/
+.coverage
+.eggs/
+dist/
