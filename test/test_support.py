@@ -24,6 +24,26 @@ class Test_support(unittest.TestCase):
         self.assertEqual(3, request.data['serviceId'])
         self.assertEqual(0, request.data['status'])
 
+    def test_get_tickets_set_all_fields_correctly(self):
+        self.client.support().get_tickets(
+            20,
+            client_id=1,
+            from_date='2017-05-13',
+            to_date='2017-05-15',
+            server_id=2,
+            service_id=3,
+            status=0
+        )
+
+        request = self.client.request
+        self.assertEqual(20, request.data['limit'])
+        self.assertEqual(1, request.data['clientId'])
+        self.assertEqual('2017-05-13', request.data['fromDate'])
+        self.assertEqual('2017-05-15', request.data['toDate'])
+        self.assertEqual(2, request.data['serverId'])
+        self.assertEqual(3, request.data['serviceId'])
+        self.assertEqual(0, request.data['status'])
+
     def test_support_create_ticket_set_all_fields_correctly(self):
         ticket_subject = 'Server is down'
         ticket_body = 'The server has a network issue!'
