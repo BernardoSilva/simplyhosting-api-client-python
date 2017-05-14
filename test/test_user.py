@@ -33,3 +33,8 @@ class Test_user(unittest.TestCase):
         request = self.client.request
         self.assertEqual(1, request.data['keyId'])
         self.assertEqual('value', request.data['optionalParam'])
+
+    def test_delete_secret_key_set_data_successfully(self):
+        self.client.user().delete_secret_key(1)
+        request = self.client.request
+        self.assertEqual(1, request.data['keyId'])
