@@ -36,3 +36,9 @@ class IP(object):
         request.data = {'ip': ip, 'serverId': server_id}
         self.apiClient.request = request
         return self.apiClient
+
+    def get_list(self, optional_data={}):
+        request = Request('post', '/ip/route')
+        request.data.update(optional_data)
+        self.apiClient.request = request
+        return self.apiClient

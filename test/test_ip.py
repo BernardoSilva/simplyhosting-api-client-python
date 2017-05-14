@@ -33,3 +33,8 @@ class Test_ip(unittest.TestCase):
         request = self.client.request
         self.assertEqual('192.168.0.1', request.data['ip'])
         self.assertEqual(1, request.data['serverId'])
+
+    def test_get_list_set_data_successfully(self):
+        self.client.ip().get_list(self.optional_data)
+        request = self.client.request
+        self.assertEqual('value', request.data['optionalParam'])
