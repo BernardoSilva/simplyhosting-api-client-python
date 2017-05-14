@@ -10,3 +10,8 @@ class Test_os(unittest.TestCase):
         self.client.os().get_params(1)
         request = self.client.request
         self.assertEqual(1, request.data['serverId'])
+
+    def test_get_available_os_versions_set_data_successfully(self):
+        self.client.os().get_available_os_versions(1)
+        request = self.client.request
+        self.assertEqual(1, request.data['serverId'])

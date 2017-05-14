@@ -10,3 +10,9 @@ class OS(object):
         request.data = {'serverId': server_id}
         self.apiClient.request = request
         return self.apiClient
+
+    def get_available_os_versions(self, server_id):
+        request = Request('post', '/os/getAvailableOsVersions')
+        request.data = {'serverId': server_id}
+        self.apiClient.request = request
+        return self.apiClient
