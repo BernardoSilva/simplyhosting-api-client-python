@@ -49,3 +49,9 @@ class Product(object):
         request.data.update(optional_data)
         self.apiClient.request = request
         return self.apiClient
+
+    def cancel_pending_order(self, order_id):
+        request = Request('post', '/product/cancelPendingOrder')
+        request.data = {'orderId': order_id}
+        self.apiClient.request = request
+        return self.apiClient

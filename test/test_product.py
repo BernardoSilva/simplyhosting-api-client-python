@@ -40,3 +40,8 @@ class Test_product(unittest.TestCase):
         self.assertEqual(1, request.data['serviceId'])
         self.assertEqual('My reason', request.data['reason'])
         self.assertEqual('value', request.data['optionalParam'])
+
+    def test_cancel_pending_order_set_data_successfully(self):
+        self.client.product().cancel_pending_order(1)
+        request = self.client.request
+        self.assertEqual(1, request.data['orderId'])
