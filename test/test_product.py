@@ -28,3 +28,8 @@ class Test_product(unittest.TestCase):
         self.assertEqual(1, request.data['productId'])
         self.assertEqual('card', request.data['paymentMethod'])
         self.assertEqual('value', request.data['optionalParam'])
+
+    def test_order_history_set_data_successfully(self):
+        self.client.product().order_history(1)
+        request = self.client.request
+        self.assertEqual(1, request.data['orderId'])
