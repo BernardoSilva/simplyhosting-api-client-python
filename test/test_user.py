@@ -38,3 +38,8 @@ class Test_user(unittest.TestCase):
         self.client.user().delete_secret_key(1)
         request = self.client.request
         self.assertEqual(1, request.data['keyId'])
+
+    def test_get_secret_keys_set_path_successfully(self):
+        self.client.user().get_secret_keys()
+        request = self.client.request
+        self.assertEqual('/user/getSecretKeys', request.path)
