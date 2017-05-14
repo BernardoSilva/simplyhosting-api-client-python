@@ -16,3 +16,8 @@ class Test_user(unittest.TestCase):
         self.client.user().ping()
         request = self.client.request
         self.assertEqual('/user/ping', request.path)
+
+    def test_get_payment_method_path_is_correct(self):
+        self.client.user().get_payment_methods()
+        request = self.client.request
+        self.assertEqual('/user/getPaymentMethods', request.path)
