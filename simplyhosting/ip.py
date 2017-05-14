@@ -30,3 +30,9 @@ class IP(object):
         request.data = {'ip': ip}
         self.apiClient.request = request
         return self.apiClient
+
+    def route(self, ip, server_id):
+        request = Request('post', '/ip/route')
+        request.data = {'ip': ip, 'serverId': server_id}
+        self.apiClient.request = request
+        return self.apiClient

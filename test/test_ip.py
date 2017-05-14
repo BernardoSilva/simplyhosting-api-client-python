@@ -27,3 +27,9 @@ class Test_ip(unittest.TestCase):
         self.client.ip().un_null_route('192.168.0.1')
         request = self.client.request
         self.assertEqual('192.168.0.1', request.data['ip'])
+
+    def test_route_set_data_successfully(self):
+        self.client.ip().route('192.168.0.1', 1)
+        request = self.client.request
+        self.assertEqual('192.168.0.1', request.data['ip'])
+        self.assertEqual(1, request.data['serverId'])
