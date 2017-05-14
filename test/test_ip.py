@@ -38,3 +38,8 @@ class Test_ip(unittest.TestCase):
         self.client.ip().get_list(self.optional_data)
         request = self.client.request
         self.assertEqual('value', request.data['optionalParam'])
+
+    def test_get_list6_set_data_successfully(self):
+        self.client.ip().get_list6(self.optional_data)
+        request = self.client.request
+        self.assertEqual('value', request.data['optionalParam'])

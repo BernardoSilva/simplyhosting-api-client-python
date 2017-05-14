@@ -38,7 +38,13 @@ class IP(object):
         return self.apiClient
 
     def get_list(self, optional_data={}):
-        request = Request('post', '/ip/route')
+        request = Request('post', '/ip/getList')
+        request.data.update(optional_data)
+        self.apiClient.request = request
+        return self.apiClient
+
+    def get_list6(self, optional_data={}):
+        request = Request('post', '/ip/getList6')
         request.data.update(optional_data)
         self.apiClient.request = request
         return self.apiClient
