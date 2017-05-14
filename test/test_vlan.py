@@ -17,3 +17,8 @@ class Test_vlan(unittest.TestCase):
         request = self.client.request
         self.assertEqual(1, request.data['serverId'])
         self.assertEqual(3, request.data['vlanSid'])
+
+    def test_list_set_correct_path(self):
+        self.client.vlan().list()
+        request = self.client.request
+        self.assertEqual('/vlan/list', request.path)

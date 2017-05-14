@@ -16,3 +16,8 @@ class Vlan(object):
         request.data = {'serverId': server_id, 'vlanSid': vlan_sid}
         self.apiClient.request = request
         return self.apiClient
+
+    def list(self):
+        request = Request('post', '/vlan/list')
+        self.apiClient.request = request
+        return self.apiClient
