@@ -11,3 +11,8 @@ class Test_ip(unittest.TestCase):
         request = self.client.request
         self.assertEqual('192.168.0.1', request.data['ip'])
         self.assertEqual('value', request.data['optionalParam'])
+
+    def test_get_ptr_set_data_successfully(self):
+        self.client.ip().get_ptr('192.168.0.1')
+        request = self.client.request
+        self.assertEqual('192.168.0.1', request.data['ip'])

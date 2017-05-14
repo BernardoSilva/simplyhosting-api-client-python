@@ -11,3 +11,9 @@ class IP(object):
         request.data.update(optional_data)
         self.apiClient.request = request
         return self.apiClient
+
+    def get_ptr(self, ip):
+        request = Request('post', '/ip/getPtr')
+        request.data = {'ip': ip}
+        self.apiClient.request = request
+        return self.apiClient
