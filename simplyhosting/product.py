@@ -32,7 +32,10 @@ class Product(object):
 
     def order_products(self, product_id, payment_method, optional_data={}):
         request = Request('post', '/product/orderProducts')
-        request.data = {'productId': product_id, 'paymentMethod': payment_method}
+        request.data = {
+            'productId': product_id,
+            'paymentMethod': payment_method
+        }
         request.data.update(optional_data)
         self.apiClient.request = request
         return self.apiClient
@@ -58,6 +61,9 @@ class Product(object):
 
     def upgrade_service(self, service_id, config_options):
         request = Request('post', '/product/upgradeService')
-        request.data = {'serviceId': service_id, 'configOptions': config_options}
+        request.data = {
+            'serviceId': service_id,
+            'configOptions': config_options
+        }
         self.apiClient.request = request
         return self.apiClient
