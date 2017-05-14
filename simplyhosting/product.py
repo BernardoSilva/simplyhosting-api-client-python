@@ -55,3 +55,9 @@ class Product(object):
         request.data = {'orderId': order_id}
         self.apiClient.request = request
         return self.apiClient
+
+    def upgrade_service(self, service_id, config_options):
+        request = Request('post', '/product/upgradeService')
+        request.data = {'serviceId': service_id, 'configOptions': config_options}
+        self.apiClient.request = request
+        return self.apiClient

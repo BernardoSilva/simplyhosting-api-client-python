@@ -45,3 +45,9 @@ class Test_product(unittest.TestCase):
         self.client.product().cancel_pending_order(1)
         request = self.client.request
         self.assertEqual(1, request.data['orderId'])
+
+    def test_upgrade_service_set_data_successfully(self):
+        self.client.product().upgrade_service(1, '22,69')
+        request = self.client.request
+        self.assertEqual(1, request.data['serviceId'])
+        self.assertEqual('22,69', request.data['configOptions'])
