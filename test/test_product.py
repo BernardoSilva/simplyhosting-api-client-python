@@ -22,8 +22,9 @@ class Test_product(unittest.TestCase):
         request = self.client.request
         self.assertEqual(1, request.data['productId'])
 
-    def test_order_product_set_data_successfully(self):
-        self.client.product().order_product(1, self.optional_data)
+    def test_order_products_set_data_successfully(self):
+        self.client.product().order_products(1, 'card', self.optional_data)
         request = self.client.request
         self.assertEqual(1, request.data['productId'])
+        self.assertEqual('card', request.data['paymentMethod'])
         self.assertEqual('value', request.data['optionalParam'])

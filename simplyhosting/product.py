@@ -29,3 +29,10 @@ class Product(object):
         request.data.update(optional_data)
         self.apiClient.request = request
         return self.apiClient
+
+    def order_products(self, product_id, payment_method, optional_data={}):
+        request = Request('post', '/product/orderProducts')
+        request.data = {'productId': product_id, 'paymentMethod': payment_method}
+        request.data.update(optional_data)
+        self.apiClient.request = request
+        return self.apiClient
