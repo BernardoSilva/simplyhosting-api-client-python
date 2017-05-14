@@ -12,6 +12,7 @@ from .reseller_vlan import ResellerVlan
 from .server import Server
 from .service import Service
 from .support import Support
+from .tool import Tool
 from .user import User
 from .vlan import Vlan
 from .response import Response
@@ -99,6 +100,9 @@ class Client(object):
 
     def support(self):
         return Support(self)
+
+    def tool(self):
+        return Tool(self)
 
     def user(self):
         return User(self)
