@@ -13,6 +13,11 @@ class Test_product(unittest.TestCase):
         self.assertEqual('value', request.data['optionalParam'])
 
     def test_get_config_options_set_data_successfully(self):
-        self.client.product().get_product_list(1)
+        self.client.product().get_config_options(1)
+        request = self.client.request
+        self.assertEqual(1, request.data['productId'])
+
+    def test_get_addons_set_data_successfully(self):
+        self.client.product().get_addons(1)
         request = self.client.request
         self.assertEqual(1, request.data['productId'])

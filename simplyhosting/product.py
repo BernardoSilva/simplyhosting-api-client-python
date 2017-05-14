@@ -16,3 +16,9 @@ class Product(object):
         request.data = {'productId': product_id}
         self.apiClient.request = request
         return self.apiClient
+
+    def get_addons(self, product_id):
+        request = Request('post', '/product/getAddons')
+        request.data = {'productId': product_id}
+        self.apiClient.request = request
+        return self.apiClient
