@@ -10,3 +10,9 @@ class Vlan(object):
         request.data = {'serverId': server_id, 'vlanSid': vlan_sid}
         self.apiClient.request = request
         return self.apiClient
+
+    def remove_server(self, server_id, vlan_sid):
+        request = Request('post', '/vlan/removeServer')
+        request.data = {'serverId': server_id, 'vlanSid': vlan_sid}
+        self.apiClient.request = request
+        return self.apiClient
