@@ -42,3 +42,10 @@ class Product(object):
         request.data = {'orderId': order_id}
         self.apiClient.request = request
         return self.apiClient
+
+    def cancel_service(self, service_id, reason, optional_data={}):
+        request = Request('post', '/product/cancelService')
+        request.data = {'serviceId': service_id, 'reason': reason}
+        request.data.update(optional_data)
+        self.apiClient.request = request
+        return self.apiClient
