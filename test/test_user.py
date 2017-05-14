@@ -43,3 +43,9 @@ class Test_user(unittest.TestCase):
         self.client.user().get_secret_keys()
         request = self.client.request
         self.assertEqual('/user/getSecretKeys', request.path)
+
+    def test_regenerate_secret_key_set_data_successfully(self):
+        self.client.user().regenerate_secret_key(1, 'r')
+        request = self.client.request
+        self.assertEqual(1, request.data['keyId'])
+        self.assertEqual('r', request.data['access'])
