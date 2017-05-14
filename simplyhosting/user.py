@@ -25,14 +25,7 @@ class User:
 
     def generate_secret_key(self, key_name, access):
         request = Request('post', '/user/generateSecretKey')
-        request.data = {}
-        key_name = kwargs.get('key_name', '')
-        access = kwargs.get('access', '')
-        if key_name:
-            request.data['keyName'] = key_name
-
-        if access:
-            request.data['access'] = access
+        request.data = {'keyName': key_name, 'access': access}
         self.apiClient.request = request
         return self.apiClient
 

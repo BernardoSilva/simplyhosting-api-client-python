@@ -21,3 +21,9 @@ class Test_user(unittest.TestCase):
         self.client.user().get_payment_methods()
         request = self.client.request
         self.assertEqual('/user/getPaymentMethods', request.path)
+
+    def test_generate_secret_key_set_data_successfully(self):
+        self.client.user().generate_secret_key(1, 'rw')
+        request = self.client.request
+        self.assertEqual(1, request.data['keyName'])
+        self.assertEqual('rw', request.data['access'])
