@@ -21,3 +21,9 @@ class Test_product(unittest.TestCase):
         self.client.product().get_addons(1)
         request = self.client.request
         self.assertEqual(1, request.data['productId'])
+
+    def test_order_product_set_data_successfully(self):
+        self.client.product().order_product(1, self.optional_data)
+        request = self.client.request
+        self.assertEqual(1, request.data['productId'])
+        self.assertEqual('value', request.data['optionalParam'])

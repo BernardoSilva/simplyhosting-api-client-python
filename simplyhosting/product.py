@@ -22,3 +22,10 @@ class Product(object):
         request.data = {'productId': product_id}
         self.apiClient.request = request
         return self.apiClient
+
+    def order_product(self, product_id, optional_data={}):
+        request = Request('post', '/product/orderProduct')
+        request.data = {'productId': product_id}
+        request.data.update(optional_data)
+        self.apiClient.request = request
+        return self.apiClient
