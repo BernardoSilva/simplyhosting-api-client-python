@@ -10,3 +10,9 @@ class Product(object):
         request.data.update(optional_data)
         self.apiClient.request = request
         return self.apiClient
+
+    def get_config_options(self, product_id):
+        request = Request('post', '/product/getConfigOptions')
+        request.data = {'productId': product_id}
+        self.apiClient.request = request
+        return self.apiClient
