@@ -29,17 +29,10 @@ class User:
         self.apiClient.request = request
         return self.apiClient
 
-    def update_secret_key(self, key_id, **kwargs):
+    def update_secret_key(self, key_id, optional_data={}):
         request = Request('post', '/user/updateSecretKey')
         request.data = {'keyId': key_id}
-        key_name = kwargs.get('key_name', '')
-        access = kwargs.get('access', '')
-        if key_name:
-            request.data['keyName'] = key_name
-
-        if access:
-            request.data['access'] = access
-
+        request.data.update(optional_data)
         self.apiClient.request = request
         return self.apiClient
 
