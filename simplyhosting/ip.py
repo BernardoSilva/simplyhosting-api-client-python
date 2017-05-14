@@ -24,3 +24,9 @@ class IP(object):
         request.data.update(optional_data)
         self.apiClient.request = request
         return self.apiClient
+
+    def un_null_route(self, ip):
+        request = Request('post', '/ip/unNullRoute')
+        request.data = {'ip': ip}
+        self.apiClient.request = request
+        return self.apiClient
