@@ -62,7 +62,8 @@ class Client(object):
         requests_response = requests_method(
             self._url(self.request.path),
             data=self.request.data,
-            params=self.request.params
+            params=self.request.params,
+            verify=False
         )
 
         return Response(requests_response)
