@@ -6,7 +6,7 @@
 ## How to install
 
 ```bash
-pip install ...
+pip install simplyhosting-api-client
 ```
 
 ## How to use
