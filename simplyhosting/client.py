@@ -15,6 +15,7 @@ from .support import Support
 from .tool import Tool
 from .user import User
 from .vlan import Vlan
+from .custom import Custom
 from .response import Response
 
 
@@ -109,3 +110,6 @@ class Client(object):
 
     def vlan(self):
         return Vlan(self)
+
+    def custom(self):
+        return Custom(self)
