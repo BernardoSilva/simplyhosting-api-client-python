@@ -9,7 +9,7 @@ class Custom(object):
         self.apiClient = apiClient
 
     def request(self, path, method_type='post', optional_data={}):
-        request = Request(method_type, method_type)
+        request = Request(method_type, path)
         request.data = optional_data
         self.apiClient.request = request
         return self.apiClient
