@@ -7,7 +7,7 @@ class Test_Custom(unittest.TestCase):
         self.optional_data={'optionalParam': 'value'}
 
     def test_request_set_data_successfully(self):
-        self.client.custom().request('/vlan/addServer', 'post', {'serverId':1, 'vlanSid': 3})
+        self.client.custom().request('post', '/vlan/addServer', {'serverId':1, 'vlanSid': 3})
         request = self.client.request
         self.assertEqual('/vlan/addServer', request.path)
         self.assertEqual('post', request.method_type)
