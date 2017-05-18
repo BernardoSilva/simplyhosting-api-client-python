@@ -29,7 +29,7 @@ class Client(object):
 
     def _(self, name):
         """build cache with uri parts.
-        This method enabled method chaining and keeps authentication 
+        This method enabled method chaining and keeps authentication
         details for new instance of Client()
         """
         return Client(
@@ -46,7 +46,7 @@ class Client(object):
 
     def _generate_token(self):
         """Generate new token with existing credentials
-        @todo if there is no key/secret, client should attempt to get a 
+        @todo if there is no key/secret, client should attempt to get a
         key with username/password and use that temporary token.
         """
         timestamp = int(time.time())
