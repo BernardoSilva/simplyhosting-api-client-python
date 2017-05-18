@@ -83,11 +83,11 @@ class Client(object):
     def _url(self, path):
         return self.host + path + '?api_key=' + self._generate_token()
 
-    def post(self):
-        self.call('post')
+    def post(self, data={}):
+        self.call('post', data=data)
 
-    def get(self):
-        self.call('get')
+    def get(self, params={}):
+        self.call('get', params=params)
 
     def call(self, method_type, data={}, params={}):
         """Final method to be called to perform the request that was built"""
