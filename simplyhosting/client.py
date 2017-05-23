@@ -39,6 +39,18 @@ class Client(object):
                     'Either (username, password) or (api_key, api_secret)'
                     ' kwargs combination are required'
                 )
+        # ensure we always work with values instead of tuples
+        if type(self.username) == tuple:
+            self.username = self.username[0]
+        if type(self.password) == tuple:
+            self.password = self.password[0]
+        if type(self.api_key) == tuple:
+            self.api_key = self.api_key[0]
+        if type(self.api_secret) == tuple:
+            self.api_secret = self.api_secret[0]
+
+        print type(self.api_key), self.api_key
+        print type(self.api_secret), self.api_secret
 
     def _generate_token(self):
         timestamp = int(time.time())
