@@ -57,14 +57,15 @@ class Client(object):
         """Reflection that avoid recursive loop during method chaining"""
         return self._(name)
 
-    def _generate_token(self):
+    def _generate_token(self, **kwargs):
         """Generate new token with existing credentials
         @todo if there is no key/secret, client should attempt to get a
         key with username/password and use that temporary token.
         """
-        timestamp = int(time.time())
+        current_timestamp = kwargs.get('current_timestamp', time.time())
+        timestamp = int(current_timestamp)
         hash_object = hashlib.sha256(
-            str(self.api_secret) + '-' + str(timestamp) + '-' + str(self.api_key)
+            self.api_secret + '-' + str(timestamp) + '-' + str(self.api_key)
         )
         token = (
             str(self.api_key) + '-' +

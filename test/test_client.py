@@ -25,5 +25,13 @@ class Test_client(unittest.TestCase):
         result = client.user.ping
         self.assertEqual(result._get_path(), '/user/ping')
 
+    def test_generate_token(self):
+        client = Client(api_key='a', api_secret='b')
+        token = client._generate_token(current_timestamp=1495662598)
+        self.assertEqual(
+            'a-21b0327777bfff62bc99d8e089adaf5a14289a9242784e030baad136d8cf2833-1495662598',
+            token
+        )
+
 if __name__ == '__main__':
     unittest.main(exit=False)
