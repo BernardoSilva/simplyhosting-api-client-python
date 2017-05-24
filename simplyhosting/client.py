@@ -62,9 +62,11 @@ class Client(object):
         current_timestamp = kwargs.get('current_timestamp', time.time())
         timestamp = int(current_timestamp)
         hash_object = hashlib.sha256(
-            str(self.api_secret) + '-' +
-            str(timestamp) + '-' +
-            str(self.api_key)
+            str(self.api_secret).encode('utf-8') +
+            '-'.encode('utf-8') +
+            str(timestamp).encode('utf-8') +
+            '-'.encode('utf-8') +
+            str(self.api_key).encode('utf-8')
         )
         token = (
             str(self.api_key) + '-' +
