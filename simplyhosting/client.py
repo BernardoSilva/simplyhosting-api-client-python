@@ -50,7 +50,8 @@ class Client(object):
             api_key=self.api_key,
             api_secret=self.api_secret,
             username=self.username,
-            password=self.password
+            password=self.password,
+            host=self.host
         )
 
     def __getattr__(self, name):
