@@ -36,7 +36,6 @@ class Client(object):
         if type(self.api_secret) == tuple:
             self.api_secret = self.api_secret[0]
 
-
     def _(self, name):
         """build cache with uri parts.
         This method enabled method chaining and keeps authentication
@@ -63,7 +62,9 @@ class Client(object):
         current_timestamp = kwargs.get('current_timestamp', time.time())
         timestamp = int(current_timestamp)
         hash_object = hashlib.sha256(
-            self.api_secret + '-' + str(timestamp) + '-' + str(self.api_key)
+            str(self.api_secret) + '-' +
+            str(timestamp) + '-' +
+            str(self.api_key)
         )
         token = (
             str(self.api_key) + '-' +
