@@ -36,9 +36,6 @@ class Client(object):
         if type(self.api_secret) == tuple:
             self.api_secret = self.api_secret[0]
 
-        print type(self.api_key), self.api_key
-        print type(self.api_secret), self.api_secret
-
 
     def _(self, name):
         """build cache with uri parts.
