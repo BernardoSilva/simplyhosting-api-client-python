@@ -2,20 +2,6 @@ import os
 import requests
 import hashlib
 import time
-from .ip import IP
-from .os import OS
-from .product import Product
-from .r1soft import R1Soft
-from .reseller_client import ResellerClient
-from .reseller_server import ResellerServer
-from .reseller_vlan import ResellerVlan
-from .server import Server
-from .service import Service
-from .support import Support
-from .tool import Tool
-from .user import User
-from .vlan import Vlan
-from .custom import Custom
 from .response import Response
 
 
@@ -32,6 +18,7 @@ class Client(object):
         self.host = kwargs.get('host', 'https://api.simplyhosting.com/v2')
         self.request = ''
         self.api_version = 'v2'
+        self._cache = kwargs.get('cache', [])
 
         if not (self.username and self.password):
             if not (self.api_key and self.api_secret):
@@ -39,12 +26,47 @@ class Client(object):
                     'Either (username, password) or (api_key, api_secret)'
                     ' kwargs combination are required'
                 )
+        # ensure we always work with values instead of tuples
+        if type(self.username) == tuple:
+            self.username = self.username[0]
+        if type(self.password) == tuple:
+            self.password = self.password[0]
+        if type(self.api_key) == tuple:
+            self.api_key = self.api_key[0]
+        if type(self.api_secret) == tuple:
+            self.api_secret = self.api_secret[0]
 
-    def _generate_token(self):
-        timestamp = int(time.time())
+    def _(self, name):
+        """build cache with uri parts.
+        This method enabled method chaining and keeps authentication
+        details for new instance of Client()
+        """
+        return Client(
+            cache=self._cache+[name],
+            api_key=self.api_key,
+            api_secret=self.api_secret,
+            username=self.username,
+            password=self.password,
+            host=self.host
+        )
 
+    def __getattr__(self, name):
+        """Reflection that avoid recursive loop during method chaining"""
+        return self._(name)
+
+    def _generate_token(self, **kwargs):
+        """Generate new token with existing credentials
+        @todo if there is no key/secret, client should attempt to get a
+        key with username/password and use that temporary token.
+        """
+        current_timestamp = kwargs.get('current_timestamp', time.time())
+        timestamp = int(current_timestamp)
         hash_object = hashlib.sha256(
-            self.api_secret + '-' + str(timestamp) + '-' + str(self.api_key)
+            str(self.api_secret).encode('utf-8') +
+            '-'.encode('utf-8') +
+            str(timestamp).encode('utf-8') +
+            '-'.encode('utf-8') +
+            str(self.api_key).encode('utf-8')
         )
         token = (
             str(self.api_key) + '-' +
@@ -53,64 +75,29 @@ class Client(object):
         )
         return token
 
+    def _get_path(self):
+        path = ''
+        for part in self._cache:
+            path += '/' + part
+        return path
+
     def _url(self, path):
         return self.host + path + '?api_key=' + self._generate_token()
 
-    def call(self):
+    def post(self, data={}):
+        return self.call('post', data=data)
+
+    def get(self, params={}):
+        return self.call('get', params=params)
+
+    def call(self, method_type, data={}, params={}):
         """Final method to be called to perform the request that was built"""
-        requests_method = getattr(requests, self.request.method_type)
+        requests_method = getattr(requests, method_type)
         requests_response = requests_method(
-            self._url(self.request.path),
-            data=self.request.data,
-            params=self.request.params,
+            self._url(self._get_path()),
+            data=data,
+            params=params,
             verify=False
         )
 
         return Response(requests_response)
-
-    # Client helper methods
-    def authenticate_with_username_password(self, username, password):
-        response = self.user().auth(username, password).call()
-        json_response = response.json()
-        self.api_key = json_response['response'][0]['api_key']
-        self.api_version = json_response['response'][0]['api_version']
-
-    # API Resources available
-    def ip(self):
-        return IP(self)
-
-    def os(self):
-        return OS(self)
-
-    def product(self):
-        return Product(self)
-
-    def r1soft(self):
-        return R1Soft(self)
-
-    def reseller_client(self):
-        return ResellerClient(self)
-
-    def reseller_vlan(self):
-        return ResellerVlan(self)
-
-    def server(self):
-        return Server(self)
-
-    def service(self):
-        return Service(self)
-
-    def support(self):
-        return Support(self)
-
-    def tool(self):
-        return Tool(self)
-
-    def user(self):
-        return User(self)
-
-    def vlan(self):
-        return Vlan(self)
-
-    def custom(self):
-        return Custom(self)

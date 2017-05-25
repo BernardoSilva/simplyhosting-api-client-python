@@ -16,7 +16,16 @@ import simplyhosting
 
 
 simplyClient = simplyhosting.Client(api_key='xxx', api_secret='your-api-secret')
-response = simplyClient.user().ping().call()
+response = simplyClient.user.ping.post()
+```
+
+This API client is using a fluent interface where you can chain the API endpoints
+as if they were attributes of the client.
+
+Create ticket example
+```
+simplyClient = simplyhosting.Client(api_key='xxx', api_secret='your-api-secret')
+response = simplyClient.support.createTicket.post({'subject':'My ticket!', 'text':'My ticket body!'})
 ```
 
 ## How to setup
