@@ -26,7 +26,6 @@ setup(
     author='Bernardo Vieira da Silva',
     author_email='benny.stuff@gmail.com',
     url='https://github.com/bernardosilva/simplyhosting-api-client-python/',
-    download_url='https://github.com/bernardosilva/simplyhosting-api-client-python/archive/0.0.1.tar.gz',
     packages=find_packages(exclude=["temp*.py", "register.py", "test"]),
     include_package_data=True,
     license='MIT',
